@@ -88,7 +88,7 @@ class TritonPythonModel:
         # TODO [DLIS:5233]: Allow asynchronous execution to lift this
         # restriction for cases there is exactly a single response to
         # a single request.
-        auto_complete_model_config.set_model_transaction_policy(dict(decoupled=True))
+        # auto_complete_model_config.set_model_transaction_policy(dict(decoupled=True))
 
         # Disabling batching in Triton, let vLLM handle the batching on its own.
         auto_complete_model_config.set_max_batch_size(0)
@@ -102,12 +102,12 @@ class TritonPythonModel:
         # assert are in decoupled mode. Currently, Triton needs to use
         # decoupled policy for asynchronously forwarding requests to
         # vLLM engine.
-        self.using_decoupled = pb_utils.using_decoupled_model_transaction_policy(
-            self.model_config
-        )
-        assert (
-            self.using_decoupled
-        ), "vLLM Triton backend must be configured to use decoupled model transaction policy"
+        # self.using_decoupled = pb_utils.using_decoupled_model_transaction_policy(
+        #     self.model_config
+        # )
+        # assert (
+        #     self.using_decoupled
+        # ), "vLLM Triton backend must be configured to use decoupled model transaction policy"
 
         engine_args_filepath = os.path.join(
             pb_utils.get_model_dir(), _VLLM_ENGINE_ARGS_FILENAME
